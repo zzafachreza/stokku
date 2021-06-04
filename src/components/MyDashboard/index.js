@@ -115,7 +115,8 @@ export default function MyKategori() {
             flex: 1,
             justifyContent: 'center',
           }}>
-          <View
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Sk')}
             style={{
               flex: 1,
               borderRadius: 10,
@@ -132,7 +133,7 @@ export default function MyKategori() {
               size={windowWidth / 5}
               color={colors.white}
             />
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               justifyContent: 'center',
@@ -147,7 +148,8 @@ export default function MyKategori() {
             </Text>
           </View>
 
-          <View
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Report')}
             style={{
               flex: 1,
               borderRadius: 10,
@@ -163,7 +165,7 @@ export default function MyKategori() {
               size={windowWidth / 5}
               color={colors.white}
             />
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               justifyContent: 'center',
@@ -183,7 +185,8 @@ export default function MyKategori() {
             flex: 1,
             justifyContent: 'center',
           }}>
-          <View
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Scan')}
             style={{
               flex: 1,
               borderRadius: 10,
@@ -200,7 +203,7 @@ export default function MyKategori() {
               size={windowWidth / 5}
               color={colors.white}
             />
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               justifyContent: 'center',
@@ -214,7 +217,8 @@ export default function MyKategori() {
               Scan Kamera Atau Manual
             </Text>
           </View>
-          <View
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Premium')}
             style={{
               flex: 1,
               borderRadius: 10,
@@ -230,7 +234,7 @@ export default function MyKategori() {
               size={windowWidth / 5}
               color={colors.white}
             />
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               justifyContent: 'center',

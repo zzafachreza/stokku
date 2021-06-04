@@ -38,14 +38,14 @@ export default function ListData() {
       setUser(res);
       console.log(res);
 
-      axios
-        .post('https://zavalabs.com/pembantuku/api/transaksi.php', {
-          id_member: res.id,
-        })
-        .then(res => {
-          console.log(res.data);
-          setData(res.data);
-        });
+      // axios
+      //   .post('https://zavalabs.com/pembantuku/api/transaksi.php', {
+      //     id_member: res.id,
+      //   })
+      //   .then(res => {
+      //     console.log(res.data);
+      //     setData(res.data);
+      //   });
     });
   }, []);
 

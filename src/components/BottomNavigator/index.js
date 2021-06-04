@@ -50,8 +50,8 @@ export default function BottomNavigator({state, descriptors, navigation}) {
           iconName = 'person';
         } else if (label === 'Scan') {
           iconName = 'barcode';
-        } else if (label === 'Data') {
-          iconName = 'document';
+        } else if (label === 'Barang') {
+          iconName = 'cube';
         } else if (label === 'Transaksi') {
           iconName = 'list';
         }

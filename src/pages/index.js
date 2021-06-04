@@ -20,6 +20,17 @@ import ListData from './ListData';
 import Notifikasi from './Notifikasi';
 import Barcode from './Barcode';
 import Master from './Master';
+import Barang from './Barang';
+import Tambah from './Tambah';
+import Sk from './Sk';
+import Scan from './Scan';
+import Report from './Report';
+import Premium from './Premuim';
+import TambahSk from './TambahSk';
+import ScanMulai from './ScanMulai';
+import ScanKamera from './ScanKamera';
+import ScanManual from './ScanManual';
+import ReportDetail from './ReportDetail';
 export {
   Splash,
   GetStarted,
@@ -41,6 +52,17 @@ export {
   PembantuSelsai,
   ListData,
   Notifikasi,
+  Barang,
+  Tambah,
   Barcode,
   Master,
+  Sk,
+  Scan,
+  Report,
+  Premium,
+  TambahSk,
+  ScanMulai,
+  ScanManual,
+  ReportDetail,
+  ScanKamera,
 };

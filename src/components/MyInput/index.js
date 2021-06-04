@@ -8,7 +8,9 @@ import {TextInput} from 'react-native-gesture-handler';
 export default function MyInput({
   onFocus,
   label,
+  autoFocus,
   iconname,
+  onSubmitEditing,
   onChangeText,
   value,
   keyboardType,
@@ -53,6 +55,8 @@ export default function MyInput({
         </Text>
       )}
       <TextInput
+        onSubmitEditing={onSubmitEditing}
+        autoFocus={autoFocus}
         onFocus={onFocus}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
@@ -61,7 +65,7 @@ export default function MyInput({
         onChangeText={onChangeText}
         autoCapitalize="none"
         style={{
-          borderColor: colors.border,
+          borderColor: colors.primary,
           borderRadius: 10,
           borderWidth: 1,
           paddingLeft: 10,

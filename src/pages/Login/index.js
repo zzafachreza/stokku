@@ -32,7 +32,7 @@ export default function Login({navigation}) {
     console.log(data);
     setTimeout(() => {
       axios
-        .post('https://zavalabs.com/pembantuku/api/login.php', data)
+        .post('https://zavalabs.com/stokku/api/login.php', data)
         .then(res => {
           console.log(res.data);
           setLoading(false);

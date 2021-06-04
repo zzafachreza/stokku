@@ -30,7 +30,18 @@ import {
   ListData,
   Notifikasi,
   Barcode,
+  Barang,
   Master,
+  Tambah,
+  Premium,
+  Sk,
+  Scan,
+  Report,
+  TambahSk,
+  ScanMulai,
+  ScanManual,
+  ScanKamera,
+  ReportDetail,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -43,9 +54,9 @@ const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Transaksi" component={ListData} />
-      <Tab.Screen name="Scan" component={Barcode} />
-      <Tab.Screen name="Data" component={Master} />
+      <Tab.Screen name="Transaksi" component={Report} />
+      <Tab.Screen name="Scan" component={Scan} />
+      <Tab.Screen name="Barang" component={Barang} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
@@ -70,17 +81,124 @@ export default function Router() {
       />
 
       <Stack.Screen
-        name="Pelamar"
-        component={Pelamar}
+        name="Tambah"
+        component={Tambah}
+        options={{
+          headerTitle: 'Tambah - Barang',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+        }}
+      />
+
+      <Stack.Screen
+        name="TambahSk"
+        component={TambahSk}
+        options={{
+          headerTitle: 'Tambah - SK',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+        }}
+      />
+
+      <Stack.Screen
+        name="ScanMulai"
+        component={ScanMulai}
+        options={({route, navigation}) => ({
+          title: 'Detail',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="ReportDetail"
+        component={ReportDetail}
+        options={({route, navigation}) => ({
+          title: 'Detail ',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="ScanManual"
+        component={ScanManual}
         options={{
           headerShown: false,
         }}
       />
+
       <Stack.Screen
-        name="PelamarDetail"
-        component={PelamarDetail}
+        name="ScanKamera"
+        component={ScanKamera}
+        options={({route, navigation}) => ({
+          title: 'Scan Kamera',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="Premium"
+        component={Premium}
         options={{
-          headerShown: false,
+          headerTitle: 'Upgrade Premium',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Sk"
+        component={Sk}
+        options={{
+          headerTitle: 'Setting SK (Surat Kerja)',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Scan"
+        component={Scan}
+        options={{
+          headerTitle: 'Mulai Stock Opname',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Report"
+        component={Report}
+        options={{
+          headerTitle: 'Laporan Stock Opname',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
         }}
       />
 
