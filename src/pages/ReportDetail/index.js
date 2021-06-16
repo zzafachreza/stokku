@@ -41,12 +41,12 @@ export default function ReportDetail({navigation, route}) {
 
   const __getDataBarang = (id_member, id_sk) => {
     axios
-      .post('https://zavalabs.com/stokku/api/transaksi_scan.php', {
+      .post('https://zavalabs.com/stokku/api/transaksi.php', {
         id_member: id_member,
         id_sk: id_sk,
       })
       .then(res => {
-        console.log('data scan,', res.data);
+        console.log('data scan soubel,', res.data);
         setData(res.data);
       });
   };
@@ -97,44 +97,73 @@ export default function ReportDetail({navigation, route}) {
             borderWidth: 1,
             padding: 10,
             borderColor: colors.primary,
+            flexDirection: 'row',
           }}>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{fontFamily: fonts.secondary[600]}}>
-              {item.sku}
-              {` - `}
-            </Text>
-            <Text style={{fontFamily: fonts.secondary[600]}}>
-              {item.nama_barang}
-            </Text>
-          </View>
+          <View style={{flex: 1}}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={{fontFamily: fonts.secondary[600], maxWidth: 100}}>
+                {item.sku}
+                {` - `}
+              </Text>
+              <Text
+                style={{
+                  color: colors.primary,
+                  fontFamily: fonts.secondary[600],
+                  maxWidth: 100,
+                }}>
+                {item.nama_barang}
+              </Text>
+            </View>
 
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{fontFamily: fonts.secondary[400], flex: 1}}>
-              Barcode : {item.barcode}
-            </Text>
+            <View>
+              <Text style={{fontFamily: fonts.secondary[400], flex: 1}}>
+                Barcode : {item.barcode}
+              </Text>
+              <Text
+                style={{
+                  fontFamily: fonts.secondary[600],
+                  flex: 1,
+                  color: colors.primary,
+                }}>
+                {item.keterangan}
+              </Text>
+            </View>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              // backgroundColor: 'red',
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+            }}>
             <View
               style={{
-                padding: 10,
+                alignItems: 'center',
               }}>
-              <Text style={{fontFamily: fonts.secondary[600], fontSize: 18}}>
+              <Text style={{fontFamily: fonts.secondary[600]}}>Current</Text>
+              <Text style={{fontFamily: fonts.secondary[400], top: 10}}>
                 {item.stok}
               </Text>
             </View>
-            <View style={{backgroundColor: colors.primary, padding: 10}}>
-              <Text
-                style={{fontFamily: fonts.secondary[600], color: colors.white}}>
-                {item.uom}
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              <Text style={{fontFamily: fonts.secondary[600]}}>SO</Text>
+              <Text style={{fontFamily: fonts.secondary[400], top: 10}}>
+                {item.qty}
+              </Text>
+            </View>
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              <Text style={{fontFamily: fonts.secondary[600]}}>Balance</Text>
+              <Text style={{fontFamily: fonts.secondary[400], top: 10}}>
+                {parseFloat(item.qty) - parseFloat(item.stok)}
               </Text>
             </View>
           </View>
-          <Text
-            style={{
-              fontFamily: fonts.secondary[600],
-              flex: 1,
-              color: colors.primary,
-            }}>
-            {item.keterangan}
-          </Text>
         </View>
       </Swipeable>
     );

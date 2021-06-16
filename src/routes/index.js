@@ -54,8 +54,8 @@ const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Transaksi" component={Report} />
-      <Tab.Screen name="Scan" component={Scan} />
+      {/* <Tab.Screen name="Transaksi" component={Report} /> */}
+      {/* <Tab.Screen name="Scan" component={Scan} /> */}
       <Tab.Screen name="Barang" component={Barang} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>

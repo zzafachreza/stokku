@@ -13,6 +13,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Button,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {MyHeader, MyInput, MyButton, MyGap} from '../../components';
 import {Icon} from 'react-native-elements';
@@ -73,6 +74,7 @@ export default function ScanMaual({navigation, route}) {
         onPress={() => {
           setBarang(item);
           refRBSheet.current.open();
+          setTheInput(true);
         }}
         style={{
           marginVertical: 10,
@@ -93,9 +95,7 @@ export default function ScanMaual({navigation, route}) {
           <Text style={{fontFamily: fonts.secondary[400], flex: 1}}>
             Barcode : {item.barcode}
           </Text>
-          <View style={{padding: 10}}>
-            <Text style={{fontFamily: fonts.secondary[600]}}>{item.stok}</Text>
-          </View>
+
           <View style={{backgroundColor: colors.secondary, padding: 10}}>
             <Text style={{fontFamily: fonts.secondary[600]}}>{item.uom}</Text>
           </View>
@@ -109,18 +109,20 @@ export default function ScanMaual({navigation, route}) {
     setTimeout(() => {
       setCari(true);
       axios
-        .post('https://zavalabs.com/stokku/api/barang_cari.php', {
+        .post('https://zavalabs.com/stokku/api/barang_cari_manual.php', {
           key: key,
           id_member: user.id,
         })
         .then(res => {
-          console.log(res.data);
+          console.log('hasil cari', res.data);
           setData(res.data);
           // setData(res.data.data);
         });
       setLoading(false);
     }, 500);
   };
+
+  const [theInput, setTheInput] = useState(false);
 
   return (
     <>
@@ -275,6 +277,7 @@ export default function ScanMaual({navigation, route}) {
             </TouchableOpacity>
           </View>
           <MyInput
+            autoFocus={theInput}
             label="Masukan Qty"
             iconname="cube"
             value={qty}
@@ -282,7 +285,6 @@ export default function ScanMaual({navigation, route}) {
               setQty(val);
               console.log(val);
             }}
-            autoFocus={true}
             keyboardType="number-pad"
           />
           {/* <MyGap jarak={10} /> */}

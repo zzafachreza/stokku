@@ -63,8 +63,8 @@ export default function Login({navigation}) {
               aspectRatio: 1,
               resizeMode: 'contain',
               aspectRatio: 1,
-              height: 300,
               marginBottom: '10%',
+              marginTop: '10%',
               alignSelf: 'center',
             }}
           />

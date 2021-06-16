@@ -72,38 +72,12 @@ export default function MyKategori() {
   const windowHeight = Dimensions.get('window').height;
   const navigation = useNavigation();
 
-  const dataKategori = [
-    {
-      label: 'Tenaga Profesional',
-      value: 'Tenaga Profesional',
-      icon: 'people',
-    },
-    {
-      label: 'Aman dan Terpercaya',
-      value: 'Aman dan Terpercaya',
-      icon: 'checkmark-done-circle',
-    },
-    {
-      label: 'Harga Bersaing',
-      value: 'Harga Bersaing',
-      icon: 'cash',
-    },
-    {
-      label: 'Layanan Terbaik',
-      value: 'Layanan Terbaik',
-      icon: 'star',
-    },
-  ];
-
   return (
     <View
       style={{
         justifyContent: 'center',
         padding: 20,
-        // backgroundColor: colors.danger,
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
       }}>
       <View
         style={{
@@ -144,7 +118,7 @@ export default function MyKategori() {
               Stock Opname
             </Text>
             <Text style={{fontFamily: fonts.secondary[400], fontSize: 12}}>
-              Setting SO
+              Setting SK
             </Text>
           </View>
 
@@ -176,7 +150,7 @@ export default function MyKategori() {
               Report
             </Text>
             <Text style={{fontFamily: fonts.secondary[400], fontSize: 12}}>
-              Daily or Montly
+              Hasil Stock Opname
             </Text>
           </View>
         </View>
@@ -214,7 +188,7 @@ export default function MyKategori() {
               Scanning
             </Text>
             <Text style={{fontFamily: fonts.secondary[400], fontSize: 12}}>
-              Scan Kamera Atau Manual
+              Kamera Atau Manual
             </Text>
           </View>
           <TouchableOpacity

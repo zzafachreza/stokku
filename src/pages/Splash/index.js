@@ -58,7 +58,7 @@ export default function Splash({navigation}) {
             fontSize: windowWidth / 20,
             color: colors.white,
           }}>
-          Mobile Apps By ZAVALABS
+          Menghitung Stok Lebih Cepat
         </Text>
       </View>
       <View>

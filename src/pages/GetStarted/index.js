@@ -62,7 +62,7 @@ export default function GetStarted({navigation}) {
             style={{
               marginTop: 50,
               fontFamily: fonts.secondary[800],
-              fontSize: windowWidth / 10,
+              fontSize: windowWidth / 8,
               color: colors.primary,
             }}>
             STOK
@@ -71,7 +71,7 @@ export default function GetStarted({navigation}) {
             style={{
               marginTop: 50,
               fontFamily: fonts.secondary[800],
-              fontSize: windowWidth / 10,
+              fontSize: windowWidth / 8,
               color: colors.secondary,
             }}>
             {' '}

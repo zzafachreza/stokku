@@ -43,7 +43,7 @@ export default function Sk({navigation, route}) {
         id_member: id_member,
       })
       .then(res => {
-        console.log('data barang,', res.data);
+        console.log('data sk number,', res.data);
         setData(res.data);
       });
   };
@@ -93,14 +93,27 @@ export default function Sk({navigation, route}) {
             borderWidth: 1,
             padding: 10,
             borderColor: colors.primary,
+            flexDirection: 'row',
           }}>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flex: 1}}>
             <Text style={{fontFamily: fonts.secondary[600]}}>{item.nama}</Text>
+            <Text style={{fontFamily: fonts.secondary[400]}}>
+              {item.tanggal}
+            </Text>
           </View>
 
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{fontFamily: fonts.secondary[400], flex: 1}}>
-              {item.tanggal}
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: 10,
+              borderRadius: 10,
+              backgroundColor:
+                item.status == 'OPEN' ? colors.danger : colors.primary,
+            }}>
+            <Text
+              style={{fontFamily: fonts.secondary[600], color: colors.white}}>
+              {item.status}
             </Text>
           </View>
         </View>

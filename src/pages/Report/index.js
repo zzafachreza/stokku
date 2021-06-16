@@ -11,7 +11,7 @@ import {
 import {getData} from '../../utils/localStorage';
 import axios from 'axios';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {MyButton} from '../../components';
+import {MyButton, MyGap} from '../../components';
 import {colors} from '../../utils/colors';
 import {TouchableOpacity, Swipeable} from 'react-native-gesture-handler';
 import {fonts} from '../../utils/fonts';
@@ -43,8 +43,20 @@ export default function Report({navigation, route}) {
         id_member: id_member,
       })
       .then(res => {
-        console.log('data barang,', res.data);
+        console.log('data sk number,', res.data);
         setData(res.data);
+      });
+  };
+
+  const posting = (id, id_member) => {
+    axios
+      .post('https://zavalabs.com/stokku/api/sk_posting.php', {
+        id: id,
+        id_member: id_member,
+      })
+      .then(res => {
+        console.log('delete', res);
+        __getDataBarang(id_member);
       });
   };
 
@@ -62,25 +74,65 @@ export default function Report({navigation, route}) {
 
   const __renderItem = ({item}) => {
     return (
-      <TouchableOpacity
-        onPress={() => navigation.navigate('ReportDetail', item)}
-        style={{
-          marginVertical: 10,
-          borderRadius: 10,
-          borderWidth: 1,
-          padding: 10,
-          borderColor: colors.primary,
-        }}>
-        <View style={{flexDirection: 'row'}}>
-          <Text style={{fontFamily: fonts.secondary[600]}}>{item.nama}</Text>
-        </View>
-
-        <View style={{flexDirection: 'row'}}>
-          <Text style={{fontFamily: fonts.secondary[400], flex: 1}}>
-            {item.tanggal}
-          </Text>
-        </View>
-      </TouchableOpacity>
+      <>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ReportDetail', item)}
+          style={{
+            marginVertical: 10,
+            borderRadius: 10,
+            borderWidth: 1,
+            padding: 10,
+            borderColor: colors.primary,
+            flexDirection: 'row',
+          }}>
+          <View style={{flex: 1}}>
+            <Text style={{fontFamily: fonts.secondary[600]}}>{item.nama}</Text>
+            <Text style={{fontFamily: fonts.secondary[400]}}>
+              {item.tanggal}
+            </Text>
+          </View>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: 10,
+              borderRadius: 10,
+              backgroundColor:
+                item.status == 'OPEN' ? colors.danger : colors.success,
+            }}>
+            <Text
+              style={{fontFamily: fonts.secondary[600], color: colors.white}}>
+              {item.status}
+            </Text>
+          </View>
+        </TouchableOpacity>
+        {item.status == 'OPEN' ? (
+          <>
+            <View style={{justifyContent: 'center'}}>
+              <TouchableOpacity
+                onPress={() => posting(item.id, item.id_member)}
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: 10,
+                  borderRadius: 10,
+                  backgroundColor: colors.primary,
+                }}>
+                <Text
+                  style={{
+                    fontFamily: fonts.secondary[600],
+                    color: colors.white,
+                  }}>
+                  POSTING
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <MyGap jarak={10} />
+          </>
+        ) : (
+          <View></View>
+        )}
+      </>
     );
   };
 

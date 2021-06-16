@@ -3,10 +3,10 @@ export const colors = {
   secondary: '#56CCF2',
   tertiary: '#FC63A6',
   background: '#6B63FF',
-  success: 'green',
+  success: '#198754',
   warning: 'yellow',
-  danger: 'red',
+  danger: '#dc3545',
   black: 'black',
   white: 'white',
-  border: '#0E542E',
+  border: '#DEDEDE',
 };

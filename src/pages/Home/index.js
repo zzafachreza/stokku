@@ -114,12 +114,12 @@ export default function Home({navigation}) {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: colors.white,
-            borderRadius: 20,
-            padding: 5,
-            marginRight: 25,
+            borderRadius: 10,
+            paddingHorizontal: 5,
+            marginRight: 10,
           }}>
           <Image
-            style={{width: 60, height: 70}}
+            style={{width: 45, height: 50}}
             source={require('../../assets/logo.png')}
           />
         </View>

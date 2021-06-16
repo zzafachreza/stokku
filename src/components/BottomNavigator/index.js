@@ -122,7 +122,7 @@ export default function BottomNavigator({state, descriptors, navigation}) {
                         ? colors.primary
                         : '#919095',
                   }}>
-                  {label}
+                  {label == 'Barang' ? 'Stokku' : label}
                 </Text>
               </View>
             </View>
