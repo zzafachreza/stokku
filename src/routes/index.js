@@ -42,6 +42,7 @@ import {
   ScanManual,
   ScanKamera,
   ReportDetail,
+  Panduan,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -98,6 +99,19 @@ export default function Router() {
         component={TambahSk}
         options={{
           headerTitle: 'Tambah - SK',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+        }}
+      />
+
+      <Stack.Screen
+        name="Panduan"
+        component={Panduan}
+        options={{
+          headerTitle: 'Panduan - Aplikasi STOK-KU',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,

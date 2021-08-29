@@ -31,7 +31,9 @@ import ScanMulai from './ScanMulai';
 import ScanKamera from './ScanKamera';
 import ScanManual from './ScanManual';
 import ReportDetail from './ReportDetail';
+import Panduan from './Panduan';
 export {
+  Panduan,
   Splash,
   GetStarted,
   Register,

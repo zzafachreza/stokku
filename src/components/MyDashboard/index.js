@@ -219,7 +219,7 @@ export default function MyKategori() {
               Premium
             </Text>
             <Text style={{fontFamily: fonts.secondary[400], fontSize: 12}}>
-              Upgrade ke Prmium
+              Upgrade ke Premium
             </Text>
           </View>
         </View>

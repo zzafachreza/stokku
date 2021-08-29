@@ -11,6 +11,7 @@ import {
 } from 'react-native-elements';
 import {storeData, getData} from '../../utils/localStorage';
 import {colors} from '../../utils/colors';
+import {MyButton, MyGap} from '../../components';
 
 export default function Account({navigation}) {
   const [user, setUser] = useState({});
@@ -131,6 +132,13 @@ export default function Account({navigation}) {
               <ListItem.Subtitle>{user.alamat}</ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
+          <MyGap jarak={10} />
+          <MyButton
+            onPress={() => navigation.navigate('Panduan')}
+            title="Panduan Aplikasi"
+            warna={colors.primary}
+            Icons="book"
+          />
           <Button
             onPress={handleSave}
             title="Sign Out"

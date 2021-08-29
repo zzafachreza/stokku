@@ -19,6 +19,9 @@ export default function MyInput({
   placeholder,
   label2,
   styleLabel,
+  textColor = colors.black,
+  labelColor = colors.primary,
+  borderColor = colors.primary,
   colorIcon = colors.primary,
 }) {
   return (
@@ -33,7 +36,7 @@ export default function MyInput({
         <Text
           style={{
             fontFamily: fonts.secondary[600],
-            color: colors.primary,
+            color: labelColor,
             left: 10,
             fontSize: 16,
             ...styleLabel,
@@ -65,7 +68,8 @@ export default function MyInput({
         onChangeText={onChangeText}
         autoCapitalize="none"
         style={{
-          borderColor: colors.primary,
+          color: textColor,
+          borderColor: borderColor,
           borderRadius: 10,
           borderWidth: 1,
           paddingLeft: 10,
