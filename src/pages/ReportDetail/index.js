@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,23 +8,30 @@ import {
   ScrollView,
   FlatList,
   TouchableWithoutFeedback,
+  Linking,
 } from 'react-native';
-import {colors} from '../../utils/colors';
-import {useIsFocused} from '@react-navigation/native';
-import {fonts} from '../../utils/fonts';
-import {getData} from '../../utils/localStorage';
+import { colors } from '../../utils/colors';
+import { useIsFocused } from '@react-navigation/native';
+import { fonts } from '../../utils/fonts';
+import { getData } from '../../utils/localStorage';
 import axios from 'axios';
-import {Swipeable} from 'react-native-gesture-handler';
-import {Icon} from 'react-native-elements';
+import { Swipeable } from 'react-native-gesture-handler';
+import { Icon } from 'react-native-elements';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
+import { MyButton } from '../../components';
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
 
-export default function ReportDetail({navigation, route}) {
+export default function ReportDetail({ navigation, route }) {
   const [user, setUser] = useState({});
   const [data, setData] = useState([]);
   const isFocused = useIsFocused();
 
   const item = route.params;
 
-  navigation.setOptions({title: item.nama});
+  navigation.setOptions({ title: item.nama });
+
+
 
   useEffect(() => {
     if (isFocused) {
@@ -64,7 +71,13 @@ export default function ReportDetail({navigation, route}) {
       });
   };
 
-  const __renderItem = ({item}) => {
+
+  const cetakShare = (x) => {
+    alert()
+  }
+
+
+  const __renderItem = ({ item }) => {
     return (
       <Swipeable
         renderRightActions={() => {
@@ -99,9 +112,9 @@ export default function ReportDetail({navigation, route}) {
             borderColor: colors.primary,
             flexDirection: 'row',
           }}>
-          <View style={{flex: 1}}>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{fontFamily: fonts.secondary[600], maxWidth: 100}}>
+          <View style={{ flex: 1 }}>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ fontFamily: fonts.secondary[600], maxWidth: 100 }}>
                 {item.sku}
                 {` - `}
               </Text>
@@ -116,7 +129,7 @@ export default function ReportDetail({navigation, route}) {
             </View>
 
             <View>
-              <Text style={{fontFamily: fonts.secondary[400], flex: 1}}>
+              <Text style={{ fontFamily: fonts.secondary[400], flex: 1 }}>
                 Barcode : {item.barcode}
               </Text>
               <Text
@@ -140,29 +153,52 @@ export default function ReportDetail({navigation, route}) {
               style={{
                 alignItems: 'center',
               }}>
-              <Text style={{fontFamily: fonts.secondary[600]}}>Current</Text>
-              <Text style={{fontFamily: fonts.secondary[400], top: 10}}>
+              <Text style={{ fontFamily: fonts.secondary[600] }}>Stok</Text>
+              <Text style={{ fontFamily: fonts.secondary[400], top: 10 }}>
                 {item.stok}
               </Text>
             </View>
-            <View
-              style={{
-                alignItems: 'center',
-              }}>
-              <Text style={{fontFamily: fonts.secondary[600]}}>SO</Text>
-              <Text style={{fontFamily: fonts.secondary[400], top: 10}}>
-                {item.qty}
-              </Text>
-            </View>
-            <View
-              style={{
-                alignItems: 'center',
-              }}>
-              <Text style={{fontFamily: fonts.secondary[600]}}>Balance</Text>
-              <Text style={{fontFamily: fonts.secondary[400], top: 10}}>
-                {parseFloat(item.qty) - parseFloat(item.stok)}
-              </Text>
-            </View>
+            {item.status == "OPEN" && <>
+              <View
+                style={{
+                  alignItems: 'center',
+                }}>
+                <Text style={{ fontFamily: fonts.secondary[600] }}>SO</Text>
+                <Text style={{ fontFamily: fonts.secondary[400], top: 10 }}>
+                  {item.qty}
+                </Text>
+              </View>
+              <View
+                style={{
+                  alignItems: 'center',
+                }}>
+                <Text style={{ fontFamily: fonts.secondary[600] }}>Balance</Text>
+                <Text style={{ fontFamily: fonts.secondary[400], top: 10 }}>
+                  {parseFloat(item.qty) - parseFloat(item.stok)}
+                </Text>
+              </View></>}
+
+
+            {item.status == "POSTED" && <>
+              <View
+                style={{
+                  alignItems: 'center',
+                }}>
+                <Text style={{ fontFamily: fonts.secondary[600] }}>Harga</Text>
+                <Text style={{ fontFamily: fonts.secondary[400], top: 10 }}>
+                  {new Intl.NumberFormat().format(item.harga)}
+                </Text>
+              </View>
+              <View
+                style={{
+                  alignItems: 'center',
+                }}>
+                <Text style={{ fontFamily: fonts.secondary[600] }}>Total</Text>
+                <Text style={{ fontFamily: fonts.secondary[400], top: 10 }}>
+                  {new Intl.NumberFormat().format(parseFloat(item.stok) * parseFloat(item.harga))}
+
+                </Text>
+              </View></>}
           </View>
         </View>
       </Swipeable>
@@ -170,10 +206,20 @@ export default function ReportDetail({navigation, route}) {
   };
 
   return (
-    <SafeAreaView style={{}}>
-      <ScrollView style={{padding: 10}}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView style={{ padding: 10 }}>
         <FlatList data={data} renderItem={__renderItem} />
       </ScrollView>
+      <View style={{
+        padding: 10
+      }}>
+        <MyButton onPress={() => {
+
+
+          Linking.openURL('https://zavalabs.com/stokku/api/print.php?id_sk=' + item.id);
+
+        }} title="PRINT / SHARE" warna={colors.danger} Icons="share-social-outline" />
+      </View>
     </SafeAreaView>
   );
 }

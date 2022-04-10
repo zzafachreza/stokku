@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {MyInput, MyGap, MyButton} from '../../components';
-import {colors} from '../../utils/colors';
-import {getData} from '../../utils/localStorage';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { MyInput, MyGap, MyButton } from '../../components';
+import { colors } from '../../utils/colors';
+import { getData } from '../../utils/localStorage';
 import axios from 'axios';
-export default function Tambah({navigation, route}) {
+export default function Tambah({ navigation, route }) {
   const [user, setUser] = useState({});
   const [kirim, setKirim] = useState({});
 
@@ -84,9 +84,24 @@ export default function Tambah({navigation, route}) {
             });
           }}
         />
+
+        <MyGap jarak={10} />
+        <MyInput
+          keyboardType="number-pad"
+          label="Harga"
+          iconname="pricetags"
+          value={kirim.harga}
+          onChangeText={val => {
+            setKirim({
+              ...kirim,
+              harga: val,
+            });
+          }}
+        />
         <MyGap jarak={10} />
         <MyInput
           label="Stok"
+          keyboardType="number-pad"
           iconname="albums"
           value={kirim.stok}
           onChangeText={val => {

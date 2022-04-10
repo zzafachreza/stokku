@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,19 +8,21 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-import {getData} from '../../utils/localStorage';
+import { getData } from '../../utils/localStorage';
 import axios from 'axios';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {MyButton} from '../../components';
-import {colors} from '../../utils/colors';
-import {TouchableOpacity, Swipeable} from 'react-native-gesture-handler';
-import {fonts} from '../../utils/fonts';
-import {useIsFocused} from '@react-navigation/native';
-import {Icon} from 'react-native-elements';
-
-export default function Barang({navigation, route}) {
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { MyButton } from '../../components';
+import { colors } from '../../utils/colors';
+import { TouchableOpacity, Swipeable } from 'react-native-gesture-handler';
+import { fonts } from '../../utils/fonts';
+import { useIsFocused } from '@react-navigation/native';
+import { Icon } from 'react-native-elements';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
+export default function Barang({ navigation, route }) {
   const [user, setUser] = useState({});
   const [data, setData] = useState([]);
+  const [tipe, setTipe] = useState(true);
   const isFocused = useIsFocused();
   //   useEffect(() => {
 
@@ -30,9 +32,10 @@ export default function Barang({navigation, route}) {
     if (isFocused) {
       console.log('called');
       getData('user').then(res => {
-        console.log(res);
+        console.log('data_user', res);
         setUser(res);
         __getDataBarang(res.id);
+        __getTipe(res.id);
       });
     }
   }, [isFocused]);
@@ -45,6 +48,20 @@ export default function Barang({navigation, route}) {
       .then(res => {
         console.log('data barang,', res.data);
         setData(res.data);
+        __getTipe(id_member)
+      });
+  };
+
+
+  const __getTipe = id_member => {
+    axios
+      .post('https://zavalabs.com/stokku/api/tipe.php', {
+        id_member: id_member,
+      })
+      .then(res => {
+        console.log('data tipe,', res.data);
+        setTipe(res.data);
+
       });
   };
 
@@ -57,10 +74,11 @@ export default function Barang({navigation, route}) {
       .then(res => {
         console.log('delete', res);
         __getDataBarang(id_member);
+        __getTipe(id_member);
       });
   };
 
-  const __renderItem = ({item}) => {
+  const __renderItem = ({ item }) => {
     return (
       <Swipeable
         renderRightActions={() => {
@@ -94,27 +112,47 @@ export default function Barang({navigation, route}) {
             padding: 10,
             borderColor: colors.primary,
           }}>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{fontFamily: fonts.secondary[600]}}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{ fontFamily: fonts.secondary[600] }}>
               {item.sku}
               {` - `}
             </Text>
-            <Text style={{fontFamily: fonts.secondary[600]}}>{item.nama}</Text>
+            <Text style={{ fontFamily: fonts.secondary[600] }}>{item.nama}</Text>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{ fontFamily: fonts.secondary[600] }}>
+              Harga : Rp. {new Intl.NumberFormat().format(item.harga)}
+
+            </Text>
+
           </View>
 
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{fontFamily: fonts.secondary[400], flex: 1}}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{ fontFamily: fonts.secondary[400], flex: 1 }}>
               Barcode : {item.barcode}
             </Text>
-            <View style={{padding: 10}}>
-              <Text style={{fontFamily: fonts.secondary[600]}}>
+            <View style={{ padding: 10 }}>
+              <Text style={{ fontFamily: fonts.secondary[600] }}>
                 {item.stok}
               </Text>
             </View>
-            <View style={{backgroundColor: colors.secondary, padding: 10}}>
-              <Text style={{fontFamily: fonts.secondary[600]}}>{item.uom}</Text>
+            <View style={{ backgroundColor: colors.secondary, padding: 10 }}>
+              <Text style={{ fontFamily: fonts.secondary[600] }}>{item.uom}</Text>
             </View>
           </View>
+          <View style={{ flexDirection: 'row' }}>
+
+            <View style={{ padding: 10, flex: 1 }}>
+              <Text style={{ fontFamily: fonts.secondary[600], }}>
+                Total Harga
+              </Text>
+            </View>
+            <View style={{ backgroundColor: colors.primary, padding: 10 }}>
+              <Text style={{ fontFamily: fonts.secondary[600], color: colors.white }}>Rp. {new Intl.NumberFormat().format(item.harga * item.stok)}
+              </Text>
+            </View>
+          </View>
+
         </View>
       </Swipeable>
     );
@@ -126,13 +164,25 @@ export default function Barang({navigation, route}) {
         flex: 1,
         padding: 10,
       }}>
-      <View>
-        <MyButton
-          onPress={() => navigation.navigate('Tambah')}
-          title="TAMBAH BARANG"
-          warna={colors.primary}
-        />
-      </View>
+
+
+      <MyButton
+        onPress={() => {
+
+          if (tipe) {
+            navigation.navigate('Tambah')
+          } else {
+            alert('Maaf Akun anda harus di UPGRADE');
+            navigation.navigate('Premium')
+          }
+
+
+        }}
+        title="TAMBAH BARANG"
+        warna={tipe ? colors.primary : colors.border}
+        colorText={tipe ? colors.white : colors.black}
+      />
+
 
       <FlatList data={data} renderItem={__renderItem} />
     </SafeAreaView>

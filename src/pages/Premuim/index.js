@@ -1,11 +1,22 @@
-import React from 'react';
-import {StyleSheet, Text, View, Linking} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {colors} from '../../utils/colors';
-import {fonts} from '../../utils/fonts';
-import {Icon} from 'react-native-elements';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Linking } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { colors } from '../../utils/colors';
+import { fonts } from '../../utils/fonts';
+import { Icon } from 'react-native-elements';
+import { getData } from '../../utils/localStorage';
 
 export default function Premium() {
+  const [user, setUser] = useState({});
+  useEffect(() => {
+
+    getData('user').then(res => {
+      console.log('data_user', res);
+      setUser(res);
+
+    });
+  }, [])
+
   return (
     <View
       style={{
@@ -42,7 +53,7 @@ export default function Premium() {
         <TouchableOpacity
           onPress={() => {
             Linking.openURL(
-              'https://api.whatsapp.com/send?text=Hallo%20Kak%20saya%20mau%20Upgrade%20Stokku&phone=6281381891098',
+              'https://zavalabs.com/stokku/bayar/transaksi/snap/index.php?id_member=' + user.id,
             );
           }}
           style={{
@@ -54,7 +65,7 @@ export default function Premium() {
             borderRadius: 10,
             flexDirection: 'row',
           }}>
-          <Icon type="ionicon" name="logo-whatsapp" color={colors.primary} />
+          <Icon type="ionicon" name="cloud-upload-outline" color={colors.primary} />
           <Text
             style={{
               color: colors.primary,
