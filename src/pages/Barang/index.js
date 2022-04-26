@@ -6,6 +6,7 @@ import {
   ScrollView,
   FlatList,
   TouchableWithoutFeedback,
+  Linking,
 } from 'react-native';
 
 import { getData } from '../../utils/localStorage';
@@ -185,6 +186,16 @@ export default function Barang({ navigation, route }) {
 
 
       <FlatList data={data} renderItem={__renderItem} />
+      <View style={{
+        padding: 10
+      }}>
+        <MyButton onPress={() => {
+
+
+          Linking.openURL('https://zavalabs.com/stokku/api/print_barang.php?id_member=' + user.id);
+
+        }} title="PRINT / SHARE" warna={colors.danger} Icons="share-social-outline" />
+      </View>
     </SafeAreaView>
   );
 }

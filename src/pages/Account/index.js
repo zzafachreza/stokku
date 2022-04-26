@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, ImageBackground} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, ImageBackground, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   Avatar,
@@ -9,11 +9,11 @@ import {
   // Icon,
   Button,
 } from 'react-native-elements';
-import {storeData, getData} from '../../utils/localStorage';
-import {colors} from '../../utils/colors';
-import {MyButton, MyGap} from '../../components';
+import { storeData, getData } from '../../utils/localStorage';
+import { colors } from '../../utils/colors';
+import { MyButton, MyGap } from '../../components';
 
-export default function Account({navigation}) {
+export default function Account({ navigation }) {
   const [user, setUser] = useState({});
   const [iLogo, setiLogo] = useState('');
 
@@ -78,7 +78,7 @@ export default function Account({navigation}) {
             }}>
             {user.nama_lengkap}
           </Text>
-          <Divider style={{backgroundColor: colors.border, height: 1}} />
+          <Divider style={{ backgroundColor: colors.border, height: 1 }} />
           <Text
             style={{
               fontSize: 16,
@@ -138,6 +138,13 @@ export default function Account({navigation}) {
             title="Panduan Aplikasi"
             warna={colors.primary}
             Icons="book"
+          />
+          <MyGap jarak={10} />
+          <MyButton
+            onPress={() => Linking.openURL('https://zavalabs.com/stokku')}
+            title="Web Connect"
+            warna={colors.secondary}
+            Icons="globe-outline"
           />
           <Button
             onPress={handleSave}
